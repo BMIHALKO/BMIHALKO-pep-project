@@ -132,11 +132,6 @@ public class SocialMediaController {
             Message newMessage = mapper.readValue(ctx.body(), Message.class);
             String newText = newMessage.getMessage_text();
     
-            // Check for invalid input (empty message or too long message text)
-            if (newText == null) {
-                ctx.status(400).result("");
-                return;
-            }
             if (newText.isBlank()) {
                 ctx.status(400).result("");
                 return;
