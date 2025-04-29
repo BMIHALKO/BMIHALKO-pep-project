@@ -83,6 +83,9 @@ public class SocialMediaController {
             ctx.status(200);
         } catch (IllegalArgumentException e) {
             ctx.status(400).result(e.getMessage());
+        } catch (Exception e) {
+            ctx.result("");
+            ctx.status(400);
         }
     }
 
@@ -124,6 +127,9 @@ public class SocialMediaController {
                 ctx.result("");
             }
         } catch (NumberFormatException e) {
+            ctx.result("");
+            ctx.status(200);
+        } catch (Exception e) {
             ctx.result("");
             ctx.status(200);
         }
