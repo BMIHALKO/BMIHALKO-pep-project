@@ -98,6 +98,7 @@ public class SocialMediaController {
             
             if (message != null) {
                 ctx.json(message);
+                ctx.status(200);
             } else {
                 ctx.result("");
             }
