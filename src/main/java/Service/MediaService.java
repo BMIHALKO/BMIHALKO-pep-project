@@ -52,9 +52,14 @@ public class MediaService {
 
     // Update an existing message
     public boolean updateMessageById(int message_id, String newMessageText) {
-        if (newMessageText == null ||
-        newMessageText.isBlank() || 
-        newMessageText.length() > 255) {
+        Message existingmessage = mediaDao.getMessageById(message_id);
+        if (existingmessage == null) {
+            throw new IllegalArgumentException("");
+        }
+        if (newMessageText.isBlank()) {
+            throw new IllegalArgumentException("");
+        }
+        if (newMessageText.length() > 255) {
             throw new IllegalArgumentException("");
         }
 
