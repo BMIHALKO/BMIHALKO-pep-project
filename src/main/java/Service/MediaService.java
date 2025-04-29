@@ -56,13 +56,6 @@ public class MediaService {
         if (existingmessage == null) {
             throw new IllegalArgumentException("");
         }
-        if (message_text.isBlank()) {
-            throw new IllegalArgumentException("");
-        }
-        if (message_text.length() > 255) {
-            throw new IllegalArgumentException("");
-        }
-
         return mediaDao.updateMessageById(message_id, message_text);
     }
 
