@@ -52,10 +52,8 @@ public class MediaService {
 
     // Update an existing message
     public boolean updateMessageById(int message_id, String message_text) {
-        Message existingmessage = mediaDao.getMessageById(message_id);
-        if (existingmessage == null) {
-            throw new IllegalArgumentException("");
-        }
+        //Message existingmessage = mediaDao.getMessageById(message_id);
+
         return mediaDao.updateMessageById(message_id, message_text);
     }
 

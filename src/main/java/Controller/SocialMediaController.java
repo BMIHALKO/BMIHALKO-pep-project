@@ -131,7 +131,10 @@ public class SocialMediaController {
             ObjectMapper mapper = new ObjectMapper();
             Message newMessage = mapper.readValue(ctx.body(), Message.class);
             String newText = newMessage.getMessage_text();
-    
+            if (newText == null) {
+                ctx.status(400).result("");
+                return;
+            }
             if (newText.isBlank()) {
                 ctx.status(400).result("");
                 return;
