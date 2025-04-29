@@ -133,12 +133,16 @@ public class SocialMediaController {
             String newText = newMessage.getMessage_text();
     
             // Check for invalid input (empty message or too long message text)
-            if (newText == null || newText.isBlank()) {
-                ctx.status(400).result("Message text must not be empty.");
+            if (newText == null) {
+                ctx.status(400).result("");
+                return;
+            }
+            if (newText.isBlank()) {
+                ctx.status(400).result("");
                 return;
             }
             if (newText.length() > 255) {
-                ctx.status(400).result("Message text must not be longer than 255 characters.");
+                ctx.status(400).result("");
                 return;
             }
     
