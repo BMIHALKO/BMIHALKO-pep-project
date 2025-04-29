@@ -13,15 +13,15 @@ public class AccountService {
     public Account registerAccount(String username, String password) {
         // Validation for Username and Password
         if (username == null || username.isEmpty()) {
-            throw new IllegalArgumentException("Username cannot be empty.");
+            throw new IllegalArgumentException("");
         }
         if (password == null || password.length() < 4) {
-            throw new IllegalArgumentException("Password must be more than 4 characters long.");
+            throw new IllegalArgumentException("");
         }
 
         // Check if username exists already
         if (accountDAO.isUsernameExists(username)) {
-            throw new IllegalArgumentException("Username already exists.");
+            throw new IllegalArgumentException("");
         }
 
         // Create New Account
@@ -32,7 +32,7 @@ public class AccountService {
     // Update Existing Account Password
     public boolean updatePassword(int account_id, String newPassword) {
         if (newPassword == null || newPassword.length() < 4) {
-            throw new IllegalArgumentException("Password must be more than 4 characters long.");
+            throw new IllegalArgumentException("");
         }
         
         return accountDAO.updateAccountPassword(account_id, newPassword);
@@ -41,10 +41,10 @@ public class AccountService {
     // Login Hanlder
     public Account login(String username, String password) {
         if (username == null || username.isEmpty()) {
-            throw new IllegalArgumentException("Username cannot be empty.");
+            throw new IllegalArgumentException("");
         }
         if (password == null || password.length() < 4) {
-            throw new IllegalArgumentException("Password must be more than 4 characters long.");
+            throw new IllegalArgumentException("");
         }
 
         Account account = accountDAO.getAccountForLogin(username, password);
