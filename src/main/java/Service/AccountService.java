@@ -11,20 +11,16 @@ public class AccountService {
     }
 
     public Account registerAccount(String username, String password) {
-        // Validation for Username and Password
         if (username == null || username.isEmpty()) {
             throw new IllegalArgumentException("");
         }
         if (password == null || password.length() < 4) {
             throw new IllegalArgumentException("");
         }
-
-        // Check if username exists already
         if (accountDAO.isUsernameExists(username)) {
             throw new IllegalArgumentException("");
         }
 
-        // Create New Account
         Account account = new Account(username, password);
         return accountDAO.registerAccount(account);
     }
@@ -34,7 +30,6 @@ public class AccountService {
         if (newPassword == null || newPassword.length() < 4) {
             throw new IllegalArgumentException("");
         }
-        
         return accountDAO.updateAccountPassword(account_id, newPassword);
     }
 
@@ -48,11 +43,9 @@ public class AccountService {
         }
 
         Account account = accountDAO.getAccountForLogin(username, password);
-
         if (account == null) {
             throw new IllegalArgumentException("");
         }
-
         return account;
     }
 

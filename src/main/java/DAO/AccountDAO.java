@@ -48,7 +48,7 @@ public class AccountDAO {
         return null;
     }
 
-    //Method to Update account's password
+    // Method to Update account's password
     public boolean updateAccountPassword(int account_id, String newPassword) {
         Connection connection = ConnectionUtil.getConnection();
         try {
@@ -65,7 +65,7 @@ public class AccountDAO {
         return false;
     }
 
-    //Method to check for existing usernames
+    // Method to check for existing usernames
     public boolean isUsernameExists(String username) {
         Connection connection = ConnectionUtil.getConnection();
         try {
@@ -81,7 +81,7 @@ public class AccountDAO {
         return false;
     }
 
-    //Method to Handle User Login
+    // Method to Handle User Login
     public Account getAccountForLogin(String username, String password) {
         Connection connection = ConnectionUtil.getConnection();
         try{
@@ -102,7 +102,7 @@ public class AccountDAO {
         return null;
     }
 
-    //Method to Retreive Account ID
+    // Method to Retreive Account ID
     public Account getAccountById(int account_id) {
         Connection connection = ConnectionUtil.getConnection();
         try {

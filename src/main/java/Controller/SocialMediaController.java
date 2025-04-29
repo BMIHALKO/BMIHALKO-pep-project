@@ -147,36 +147,23 @@ public class SocialMediaController {
                 ctx.status(400).result("");
                 return;
             }
-            if (newText == null) {
-                ctx.status(400).result("");
-                return;
-            }
-            if (newText.isBlank()) {
-                ctx.status(400).result("");
-                return;
-            }
-            if (newText.length() > 255) {
+            if (newText == null || newText.isBlank() || newText.length() > 255) {
                 ctx.status(400).result("");
                 return;
             }
     
-            // Attempt to update the message
             boolean updated = mediaService.updateMessageById(message_id, newText);
             
             if (updated) {
-                // Return the updated message if successful
                 Message updatedMessage = mediaService.getMessageById(message_id);
                 ctx.json(updatedMessage);
                 ctx.status(200);
             } else {
-                // If no message found with the given ID, return 400 with an appropriate message
                 ctx.status(400).result("");
             }
         } catch (NumberFormatException e) {
-            // If the message_id is invalid (not a number), return 400
             ctx.status(400).result("");
         } catch (Exception e) {
-            // Catch any other unexpected errors and return 400 (to avoid 500)
             ctx.status(400).result("");
         }
     }

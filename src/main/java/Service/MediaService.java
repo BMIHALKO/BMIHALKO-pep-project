@@ -26,8 +26,7 @@ public class MediaService {
             message.getMessage_text().length() > 255) {
             return null;
         }
-
-        // Make sure posted_by exists
+        // Check to see if posted_by exists
         Account account = accountDAO.getAccountById(message.getPosted_by());
         if (account == null) {
             throw new IllegalArgumentException("");
@@ -52,8 +51,6 @@ public class MediaService {
 
     // Update an existing message
     public boolean updateMessageById(int message_id, String message_text) {
-        //Message existingmessage = mediaDao.getMessageById(message_id);
-
         return mediaDao.updateMessageById(message_id, message_text);
     }
 
