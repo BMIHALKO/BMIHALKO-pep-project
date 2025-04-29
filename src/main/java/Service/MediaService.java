@@ -30,7 +30,7 @@ public class MediaService {
         // Make sure posted_by exists
         Account account = accountDAO.getAccountById(message.getPosted_by());
         if (account == null) {
-            throw new IllegalArgumentException("Account with ID: " + message.getPosted_by() + " does not exist.");
+            throw new IllegalArgumentException("");
         }
 
         return mediaDao.createMessage(message);
@@ -45,7 +45,7 @@ public class MediaService {
     public Message getMessageById(int message_id) {
         Message message = mediaDao.getMessageById(message_id);
         if (message == null) {
-            throw new IllegalArgumentException("Message with ID: " + message_id + " not found.");
+            throw new IllegalArgumentException("");
         }
         return message;
     }
@@ -55,7 +55,7 @@ public class MediaService {
         if (newMessageText == null ||
         newMessageText.isBlank() || 
         newMessageText.length() > 255) {
-            throw new IllegalArgumentException("Updated message text must be non-empty and no longer than 255 characters.");
+            throw new IllegalArgumentException("");
         }
 
         return mediaDao.updateMessageById(message_id, newMessageText);
@@ -65,7 +65,7 @@ public class MediaService {
     public boolean deleteMessageById(int message_id) {
         Message message = mediaDao.getMessageById(message_id);
         if (message == null) {
-            throw new IllegalArgumentException("Message with ID: " + message_id + " does not exist.");
+            throw new IllegalArgumentException("");
         }
         return mediaDao.deleteMessageById(message_id);
     }
@@ -74,7 +74,7 @@ public class MediaService {
     public List<Message> getMessagesByAccountId(int account_id) {
         Account account = accountDAO.getAccountById(account_id);
         if (account == null) {
-            throw new IllegalArgumentException("Account with ID: " + account_id + " does not exist.");
+            throw new IllegalArgumentException("");
         }
 
         return mediaDao.getMessagesByAccountId(account_id);
