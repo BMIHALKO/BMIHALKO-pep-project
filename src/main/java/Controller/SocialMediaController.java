@@ -131,6 +131,12 @@ public class SocialMediaController {
             ObjectMapper mapper = new ObjectMapper();
             Message newMessage = mapper.readValue(ctx.body(), Message.class);
             String newText = newMessage.getMessage_text();
+            Message existinMessage = mediaService.getMessageById(message_id);
+
+            if (existinMessage == null) {
+                ctx.status(400).result("");
+                return;
+            }
             if (newText == null) {
                 ctx.status(400).result("");
                 return;
@@ -154,14 +160,14 @@ public class SocialMediaController {
                 ctx.status(200);
             } else {
                 // If no message found with the given ID, return 400 with an appropriate message
-                ctx.status(400).result("Message with ID: " + message_id + " not found.");
+                ctx.status(400).result("");
             }
         } catch (NumberFormatException e) {
             // If the message_id is invalid (not a number), return 400
-            ctx.status(400).result("Invalid message ID format.");
+            ctx.status(400).result("");
         } catch (Exception e) {
             // Catch any other unexpected errors and return 400 (to avoid 500)
-            ctx.status(400).result("Failed to update message due to a server error.");
+            ctx.status(400).result("");
         }
     }
 
