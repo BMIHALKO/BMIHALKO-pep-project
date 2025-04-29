@@ -50,7 +50,7 @@ public class AccountService {
         Account account = accountDAO.getAccountForLogin(username, password);
 
         if (account == null) {
-            throw new IllegalArgumentException("Invalid Username or password.");
+            throw new IllegalArgumentException("");
         }
 
         return account;
