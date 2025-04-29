@@ -56,7 +56,7 @@ public class MediaService {
         if (existingmessage == null) {
             throw new IllegalArgumentException("");
         }
-        if (newMessageText.isBlank()) {
+        if (newMessageText.isEmpty()) {
             throw new IllegalArgumentException("");
         }
         if (newMessageText.length() > 255) {
