@@ -106,6 +106,9 @@ public class SocialMediaController {
         } catch (NumberFormatException e) {
             ctx.result("");
             ctx.status(200);
+        } catch (Exception e) {
+            ctx.result("");
+            ctx.status(200);
         }
     }
 
