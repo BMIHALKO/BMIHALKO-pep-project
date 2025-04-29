@@ -56,11 +56,11 @@ public class MediaService {
         if (existingmessage == null) {
             throw new IllegalArgumentException("");
         }
-        if (newMessageText.isEmpty()) {
-            throw new IllegalArgumentException("");
+        if (newMessageText.isBlank()) {
+            throw new IllegalArgumentException("Message text cannot be empty.");
         }
         if (newMessageText.length() > 255) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Message text is too long.");
         }
 
         return mediaDao.updateMessageById(message_id, newMessageText);
