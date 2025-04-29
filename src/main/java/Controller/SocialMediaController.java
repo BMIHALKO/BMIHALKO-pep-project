@@ -125,31 +125,48 @@ public class SocialMediaController {
         }
     }
 
-    private void updateMessageByIdHandler (Context ctx) throws JsonProcessingException {
+    private void updateMessageByIdHandler(Context ctx) throws JsonProcessingException {
         try {
             int message_id = Integer.parseInt(ctx.pathParam("message_id"));
             ObjectMapper mapper = new ObjectMapper();
             Message newMessage = mapper.readValue(ctx.body(), Message.class);
             String newText = newMessage.getMessage_text();
-
-            if (newText == null ||
-                newText.isBlank() ||
-                newText.length() > 255) {
-                    ctx.status(400).result("Message text must be non-empty and no longer than 255 characters");
-                    return;
+    
+            // Handling invalid message text cases with detailed exceptions
+            if (newText == null) {
+                // Case where the message text is null
+                ctx.status(400).result("Message text cannot be null.");
+                return;
             }
-
+    
+            if (newText.isBlank()) {
+                // Case where the message text is blank
+                ctx.status(400).result("Message text cannot be empty.");
+                return;
+            }
+    
+            if (newText.length() > 255) {
+                // Case where the message text is too long
+                ctx.status(400).result("Message text cannot be longer than 255 characters.");
+                return;
+            }
+    
+            // Proceed to update if none of the above conditions are met
             boolean updated = mediaService.updateMessageById(message_id, newText);
-            
+    
             if (updated) {
-                Message updateMessage = mediaService.getMessageById(message_id);
-                ctx.json(updateMessage);
+                Message updatedMessage = mediaService.getMessageById(message_id);
+                ctx.json(updatedMessage);
                 ctx.status(200);
             } else {
                 ctx.status(400).result("Message with ID: " + message_id + " not found.");
             }
         } catch (NumberFormatException e) {
-            ctx.status(400).result("Invalid Request.");
+            // Handle invalid number format (for message_id)
+            ctx.status(400).result("Invalid message ID format.");
+        } catch (JsonProcessingException e) {
+            // Handle JSON parsing errors
+            ctx.status(400).result("Invalid JSON format.");
         }
     }
 
