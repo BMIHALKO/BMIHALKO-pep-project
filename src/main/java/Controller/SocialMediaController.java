@@ -5,6 +5,7 @@ import Model.Message;
 import Service.AccountService;
 import Service.MediaService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -176,13 +177,18 @@ public class SocialMediaController {
             int account_id = Integer.parseInt(ctx.pathParam("account_id"));
             List<Message> messages = mediaService.getMessagesByAccountId(account_id);
 
+            if (messages == null) {
+                messages = new ArrayList<>();
+            }
+
             ctx.json(messages);
             ctx.status(200);
         } catch (NumberFormatException e) {
             ctx.result("");
             ctx.status(200);
+        } catch (Exception e) {
+            ctx.json(new ArrayList<>());
+            ctx.status(200);
         }
     }
-
-
 }
