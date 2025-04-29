@@ -51,19 +51,19 @@ public class MediaService {
     }
 
     // Update an existing message
-    public boolean updateMessageById(int message_id, String newMessageText) {
+    public boolean updateMessageById(int message_id, String message_text) {
         Message existingmessage = mediaDao.getMessageById(message_id);
         if (existingmessage == null) {
             throw new IllegalArgumentException("");
         }
-        if (newMessageText.isBlank()) {
-            throw new IllegalArgumentException("Message text cannot be empty.");
+        if (message_text.isBlank()) {
+            throw new IllegalArgumentException("");
         }
-        if (newMessageText.length() > 255) {
-            throw new IllegalArgumentException("Message text is too long.");
+        if (message_text.length() > 255) {
+            throw new IllegalArgumentException("");
         }
 
-        return mediaDao.updateMessageById(message_id, newMessageText);
+        return mediaDao.updateMessageById(message_id, message_text);
     }
 
     // Delete message by ID
