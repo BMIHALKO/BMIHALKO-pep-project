@@ -1,0 +1,59 @@
+package Service;
+
+import Model.Account;
+import DAO.AccountDAO;
+
+public class AccountService {
+    private AccountDAO accountDAO;
+
+    public AccountService() {
+        this.accountDAO = new AccountDAO();
+    }
+
+    public Account registerAccount(String username, String password) {
+        // Validation for Username and Password
+        if (username == null || username.isEmpty()) {
+            throw new IllegalArgumentException("Username cannot be empty.");
+        }
+        if (password == null || password.length() < 4) {
+            throw new IllegalArgumentException("Password must be more than 4 characters long.");
+        }
+
+        // Check if username exists already
+        if (accountDAO.isUsernameExists(username)) {
+            throw new IllegalArgumentException("Username already exists.");
+        }
+
+        // Create New Account
+        Account account = new Account(username, password);
+        return accountDAO.registerAccount(account);
+    }
+
+    // Update Existing Account Password
+    public boolean updatePassword(int account_id, String newPassword) {
+        if (newPassword == null || newPassword.length() < 4) {
+            throw new IllegalArgumentException("Password must be more than 4 characters long.");
+        }
+        
+        return accountDAO.updateAccountPassword(account_id, newPassword);
+    }
+
+    // Login Hanlder
+    public Account login(String username, String password) {
+        if (username == null || username.isEmpty()) {
+            throw new IllegalArgumentException("Username cannot be empty.");
+        }
+        if (password == null || password.length() < 4) {
+            throw new IllegalArgumentException("Password must be more than 4 characters long.");
+        }
+
+        Account account = accountDAO.getAccountForLogin(username, password);
+
+        if (account == null) {
+            throw new IllegalArgumentException("Invalid Username or password.");
+        }
+
+        return account;
+    }
+
+}
